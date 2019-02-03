@@ -21,7 +21,7 @@ class Mario:
             self.distance_to_obstacles[obstacle] = (0, 0, 0)
         self.update_obstacle_distance(obstacles)
 
-        self.image = pygame.image.load("/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/mario.png")
+        self.image = pygame.image.load("./mario.png")
         self.x_cor, self.y_cor = x_cor, y_cor
         self.speed = 0
         self.acceleration = 0

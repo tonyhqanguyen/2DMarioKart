@@ -4,12 +4,12 @@ Obstacle class for racing game
 from random import choice
 import pygame
 
-bowser = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/bowser.png"
-donkeykong = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/donkeykong.png"
-toad = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/toad.png"
-toadette = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/toadette.png"
-yoshi = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/yoshi.png"
-waluigi = "/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/waluigi.png"
+bowser = "./bowser.png"
+donkeykong = "./donkeykong.png"
+toad = "./toad.png"
+toadette = "./toadette.png"
+yoshi = "./yoshi.png"
+waluigi = "./waluigi.png"
 
 images = [bowser, donkeykong, toad, toadette, yoshi, waluigi]
 

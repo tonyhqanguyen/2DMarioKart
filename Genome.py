@@ -3,6 +3,9 @@ The Neural Network
 """
 from typing import List, Union
 from random import choice, uniform
+from Node import Node
+from Gene import Gene
+from ConnectionHistory import ConnectionHistory
 
 
 class Genome:
@@ -10,13 +13,13 @@ class Genome:
     The Neural Network (game) of the game.
     """
     genes: List[Gene]
-    nodes: List[Nodes]
+    nodes: List[Node]
     inputs: int
     outputs: int
     layers: int
     next_node: int
     bias_node: int
-    network: List[Nodes]
+    network: List[Node]
     is_crossover: bool
 
     def __init__(self, inputs: int, outputs: int, is_crossover: bool=False) -> None:
@@ -95,7 +98,7 @@ class Genome:
         """
         # randomly add a connection between 2 genes if there are currently no connections between any genes
         if len(self.genes) == 0:
-            self.add_connections(history)
+            self.add_connection(history)
             # enough mutation for now!
             return
 
@@ -289,7 +292,7 @@ class Genome:
 
         # clone the connections into the offspring's connections
         for info in zip(inheriting_genes, gene_statuses):
-            gene_to_add = info[0].clone
+            gene_to_add = info[0].clone(info[0].starting_node.number, info[0].ending_node.number)
             gene_to_add.enabled = info[1]
             offspring.genes.append(gene_to_add)
 
@@ -313,10 +316,31 @@ class Genome:
         """
         clone = Genome(self.inputs, self.outputs)
         clone.nodes = [node.clone() for node in self.nodes]
-        clone.genes = [gene.clone() for gene in self.genes]
+        clone.genes = [gene.clone(gene.starting_node, gene.ending_node) for gene in self.genes]
         clone.layers = self.layers
         clone.next_node = self.next_node
         clone.bias_node = self.bias_node
         clone.is_crossover = self.is_crossover
 
         return clone
+
+    def neural_net_result(self, input_values: List[float]) -> List[float]:
+        """
+        Return the output of the neural network as a result of the set of input values <input_values>.
+        """
+        for input_value in range(self.inputs):
+            self.nodes[input_value].output_value = input_values[input_value]
+
+        self.nodes[self.bias_node].output_value = 1
+
+        for node in self.network:
+            node.engage()
+
+        output_values = []
+        for index in range(self.outputs):
+            output_values[index] = self.nodes[self.inputs + index].output_value
+
+        for node in self.nodes:
+            node.input_sum = 0
+
+        return output_values
