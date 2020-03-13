@@ -1,0 +1,2 @@
+echo This module requires Python>=3.6
+python3 gameclass.py
