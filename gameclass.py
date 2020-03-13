@@ -170,7 +170,7 @@ def main():
     pygame.init()
 
     # lane
-    background = Background("/Users/tonynguyen/Desktop/ML/MachineLearning/evolution/lane3.jpeg", 0, -1000)
+    background = Background("lane3.jpeg", 0, -1000)
 
     # dimensions
     display_width = 550
@@ -233,13 +233,13 @@ def main():
             crash = True
 
         # if Mario's idle time is >= 30, ends game through crash
-        if idle_time >= 30:
+        if idle_time >= 100:
             crash = True
 
         # display game over banner when crashed
         if crash:
             pygame.draw.rect(game_display, (255, 0, 0), (0, 150, 800, 200))
-            game_display.blit(pygame.font.SysFont("Arial", 100).render("Game Over!", True, (0, 0, 0)), (80, 220))
+            game_display.blit(pygame.font.SysFont("Arial", 80).render("Game Over!", True, (0, 0, 0)), (50, 200))
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
